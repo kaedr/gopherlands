@@ -5,6 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Here goes... something again?")
-	fmt.Println("Are we signed now?")
+	fmt.Println("Here goes another signing test")
 }
