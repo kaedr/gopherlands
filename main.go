@@ -14,6 +14,7 @@ import (
 	"github.com/g3n/engine/material"
 	"github.com/g3n/engine/math32"
 	"github.com/g3n/engine/renderer"
+	"github.com/g3n/engine/texture"
 	"github.com/g3n/engine/util/helper"
 	"github.com/g3n/engine/window"
 )
@@ -55,6 +56,15 @@ func main() {
 	clrs[5] = math32.NewColor("DarkViolet")
 	mats := make([]*material.Standard, 6)
 
+	txtrs := make([]*texture.Texture2D, 6)
+	txtrs[0], _ = texture.NewTexture2DFromImage("one.png")
+	txtrs[1], _ = texture.NewTexture2DFromImage("two.png")
+	txtrs[2], _ = texture.NewTexture2DFromImage("three.png")
+	txtrs[3], _ = texture.NewTexture2DFromImage("four.png")
+	txtrs[4], _ = texture.NewTexture2DFromImage("five.png")
+	txtrs[5], _ = texture.NewTexture2DFromImage("six.png")
+	mats2 := make([]*material.Standard, 6)
+
 	// Create a colored cube and add it to the scene
 	geom := geometry.NewCube(1)
 	mesh := graphic.NewMesh(geom, nil)
@@ -63,15 +73,18 @@ func main() {
 		mesh.AddGroupMaterial(mats[i], i)
 	}
 	scene.Add(mesh)
+	mesh.SetPosition(1, 0, 0)
 
 	// Create a colored cube and add it to the scene
 	geom2 := geometry.NewCube(1)
 	mesh2 := graphic.NewMesh(geom2, nil)
 	for i := 0; i < 6; i++ {
-		mesh2.AddGroupMaterial(mats[i], i)
+		mats2[i] = material.NewStandard(math32.NewColor("white"))
+		mats2[i].AddTexture(txtrs[i])
+		mesh2.AddGroupMaterial(mats2[i], i)
 	}
 	scene.Add(mesh2)
-	mesh2.SetPosition(1, 1, 1)
+	mesh2.SetPosition(0, 1, 0)
 
 	// keep track of current color offset
 	colOffset := 0
