@@ -1,7 +1,11 @@
 package main
 
-import "github.com/kaedr/gopherlands/client"
+import (
+	//"github.com/kaedr/gopherlands/client"
+	"github.com/kaedr/gopherlands/assets"
+)
 
 func main() {
-	client.StartClient()
+	//client.StartClient()
+	assets.LoadBlocks()
 }

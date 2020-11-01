@@ -1,20 +1,19 @@
-package main
+package assets
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
+	"io/ioutil"
+
+	"github.com/kaedr/gopherlands/world"
 )
 
-func main() {
-	testJSON := `
-    {
-      "a": "thing",
-      "b": "another thing"
+var Blocks map[string]world.Block
+
+func LoadBlocks() {
+    content, err := ioutil.ReadFile("assets/blocks/stones.json")
+    if err != nil {
+        log.Fatal(err)
     }
-  `
-
-	var testParsed map[string]string
-
-	json.Unmarshal([]byte(testJSON), &testParsed)
-	fmt.Println("Parsed [a]: ", testParsed["a"])
+	json.Unmarshal([]byte(content), &Blocks)
 }

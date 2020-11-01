@@ -1,0 +1,10 @@
+{
+	"granite": {
+		"toughness": 10,
+		"substances": ["stone"],
+		"faces": {
+			"front": "test/0_one.png",
+			"sides": "test/1_two.png"
+		}
+	}
+}

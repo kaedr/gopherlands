@@ -15,9 +15,9 @@ const (
 
 // Block as parsed from our json
 type Block struct {
-	name   string
-	facing uint8
-	faces  map[string]string
+	Toughness  int
+	Substances []string
+	Faces      map[string]string
 }
 
 // TexturedBlock is a block that can be placed in the world
