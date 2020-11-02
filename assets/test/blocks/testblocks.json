@@ -1,0 +1,15 @@
+[
+	{
+		"name": "TestBlock"
+		"toughness": 10,
+		"substances": ["Stone"],
+		"faces": {
+			"front": "0_one.png"
+      "back": "1_two.png"
+      "top": "2_three.png"
+      "bottom": "3_four.png"
+      "left": "4_five.pn"
+      "right": "5_six.png"
+		}
+	}
+]

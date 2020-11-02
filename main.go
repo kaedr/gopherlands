@@ -7,5 +7,5 @@ import (
 
 func main() {
 	//client.StartClient()
-	assets.LoadBlocks()
+	assets.LoadAssets()
 }

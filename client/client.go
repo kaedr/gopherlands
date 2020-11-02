@@ -58,12 +58,12 @@ func StartClient() {
 	mats := make([]*material.Standard, 6)
 
 	txtrs := make([]*texture.Texture2D, 6)
-	txtrs[0], _ = texture.NewTexture2DFromImage("assets/test/0_one.png")
-	txtrs[1], _ = texture.NewTexture2DFromImage("assets/test/1_two.png")
-	txtrs[2], _ = texture.NewTexture2DFromImage("assets/test/2_three.png")
-	txtrs[3], _ = texture.NewTexture2DFromImage("assets/test/3_four.png")
-	txtrs[4], _ = texture.NewTexture2DFromImage("assets/test/4_five.png")
-	txtrs[5], _ = texture.NewTexture2DFromImage("assets/test/5_six.png")
+	txtrs[0], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/0_one.png")
+	txtrs[1], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/1_two.png")
+	txtrs[2], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/2_three.png")
+	txtrs[3], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/3_four.png")
+	txtrs[4], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/4_five.png")
+	txtrs[5], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/5_six.png")
 	mats2 := make([]*material.Standard, 6)
 
 	// Create a colored cube and add it to the scene
@@ -71,6 +71,7 @@ func StartClient() {
 	mesh := graphic.NewMesh(geom, nil)
 	for i := 0; i < 6; i++ {
 		mats[i] = material.NewStandard(clrs[i])
+		mats[i].AddTexture(txtrs[i])
 		mesh.AddGroupMaterial(mats[i], i)
 	}
 	mesh.SetPosition(1, 0, 0)

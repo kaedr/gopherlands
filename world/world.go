@@ -15,6 +15,7 @@ const (
 
 // Block as parsed from our json
 type Block struct {
+	Name       string
 	Toughness  int
 	Substances []string
 	Faces      map[string]string

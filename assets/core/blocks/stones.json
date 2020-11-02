@@ -1,0 +1,10 @@
+[
+	{
+		"name": "Granite"
+		"toughness": 65,
+		"substances": ["Stone", "StoneRough"],
+		"faces": {
+			"sides": "granite.png"
+		}
+	}
+]
