@@ -2,6 +2,7 @@ package world
 
 import (
 	"github.com/g3n/engine/material"
+	"github.com/kaedr/gopherlands/assets"
 	//"github.com/g3n/engine/math32"
 	//"github.com/g3n/engine/texture"
 )
@@ -13,22 +14,14 @@ const (
 	WorldHeight = 256
 )
 
-// Block as parsed from our json
-type Block struct {
-	Name       string
-	Toughness  int
-	Substances []string
-	Faces      map[string]string
-}
-
 // TexturedBlock is a block that can be placed in the world
 type TexturedBlock struct {
-	block    *Block
+	block    *assets.Block
 	textures map[string]*material.Standard
 }
 
 // Chunk stores blocks in convenient sections for working with
 type Chunk struct {
 	X, Y   int
-	Blocks [ChunkSize][ChunkSize][WorldHeight]Block
+	Blocks [ChunkSize][ChunkSize][WorldHeight]assets.Block
 }
