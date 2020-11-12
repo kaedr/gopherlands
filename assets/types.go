@@ -2,8 +2,6 @@ package assets
 
 // Asset is used to represent all the things we can load from configs
 type Asset interface {
-	AssetName()
-	AssetPath()
 	AssetFullPath()
 }
 
@@ -16,17 +14,7 @@ type Block struct {
 	Faces      map[string]string
 }
 
-// AssetName this block goes by
-func (blck Block) AssetName() string {
-	return blck.Name
-}
-
-// AssetPath where it lives
-func (blck Block) AssetPath() string {
-	return blck.Path
-}
-
-// AssetFullPath for it's fully qualified id
-func (blck Block) AssetFullPath() string {
+// FullPath for it's fully qualified id
+func (blck Block) FullPath() string {
 	return blck.Path + "/" + blck.Name
 }
