@@ -1,7 +1,8 @@
 [
 	{
-		"name": "Granite",
-		"path": "core/blocks/stones",
+		"name": "granite",
+		"pretty": "Granite",
+		"path": "core.blocks.stones",
 		"toughness": 65,
 		"substances": ["Stone", "StoneRough"],
 		"faces": {

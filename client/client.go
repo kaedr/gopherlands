@@ -1,22 +1,21 @@
 package client
 
 import (
+	"log"
 	"time"
 
 	"github.com/g3n/engine/app"
 	"github.com/g3n/engine/camera"
 	"github.com/g3n/engine/core"
-	"github.com/g3n/engine/geometry"
 	"github.com/g3n/engine/gls"
-	"github.com/g3n/engine/graphic"
 	"github.com/g3n/engine/gui"
 	"github.com/g3n/engine/light"
-	"github.com/g3n/engine/material"
 	"github.com/g3n/engine/math32"
 	"github.com/g3n/engine/renderer"
-	"github.com/g3n/engine/texture"
 	"github.com/g3n/engine/util/helper"
 	"github.com/g3n/engine/window"
+	rend "github.com/kaedr/gopherlands/client/renderer"
+	"github.com/kaedr/gopherlands/world"
 )
 
 // StartClient gets the game client running
@@ -48,64 +47,26 @@ func StartClient() {
 	a.Subscribe(window.OnWindowSize, onResize)
 	onResize("", nil)
 
-	clrs := make([]*math32.Color, 6)
-	clrs[0] = math32.NewColor("Red")
-	clrs[1] = math32.NewColor("DarkOrange")
-	clrs[2] = math32.NewColor("Yellow")
-	clrs[3] = math32.NewColor("Green")
-	clrs[4] = math32.NewColor("Blue")
-	clrs[5] = math32.NewColor("DarkViolet")
-	mats := make([]*material.Standard, 6)
+	rendChunk := new(rend.RenderedChunk)
 
-	txtrs := make([]*texture.Texture2D, 6)
-	txtrs[0], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/0_one.png")
-	txtrs[1], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/1_two.png")
-	txtrs[2], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/2_three.png")
-	txtrs[3], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/3_four.png")
-	txtrs[4], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/4_five.png")
-	txtrs[5], _ = texture.NewTexture2DFromImage("assets/test/blocks/textures/5_six.png")
-	mats2 := make([]*material.Standard, 6)
-
-	// Create a colored cube and add it to the scene
-	geom := geometry.NewCube(1)
-	mesh := graphic.NewMesh(geom, nil)
-	for i := 0; i < 6; i++ {
-		mats[i] = material.NewStandard(clrs[i])
-		mats[i].AddTexture(txtrs[i])
-		mesh.AddGroupMaterial(mats[i], i)
-	}
-	mesh.SetPosition(1, 0, 0)
-	scene.Add(mesh)
-
-	// Create a colored cube and add it to the scene
-	geom2 := geometry.NewCube(1)
-	mesh2 := graphic.NewMesh(geom2, nil)
-	for i := 0; i < 6; i++ {
-		mats2[i] = material.NewStandard(math32.NewColor("white"))
-		mats2[i].AddTexture(txtrs[i])
-		mesh2.AddGroupMaterial(mats2[i], i)
-	}
-	mesh2.SetPosition(0, 1, 0)
-	scene.Add(mesh2)
-
-	// keep track of current color offset
-	colOffset := 0
-	// Create and add a button to the scene
-	btn := gui.NewButton("Advance Color")
-	btn.SetPosition(200, 40)
-	btn.SetSize(40, 40)
-	btn.Subscribe(gui.OnClick, func(name string, ev interface{}) {
-		colOffset++
-		for i := 0; i < 6; i++ {
-			mats[i].SetColor(clrs[(i+colOffset)%6])
+	log.Println("Starting our big render loop")
+	for i, X := range world.ChunkGen().Blocks {
+		for j, Z := range X {
+			for k, block := range Z {
+				texBlock := new(rend.TexturedBlock)
+				texBlock.Init(block)
+				rendChunk.Blocks[i][j][k] = texBlock
+				// Create a  cube and add it to the scene
+				scene.Add(texBlock.RenderAt(i, k, j))
+			}
 		}
-	})
-	scene.Add(btn)
+	}
+	log.Println("Finishing our big render loop")
 
 	// Create and add lights to the scene
 	scene.Add(light.NewAmbient(&math32.Color{R: 1.0, G: 1.0, B: 1.0}, 0.8))
 	pointLight := light.NewPoint(&math32.Color{R: 1, G: 1, B: 1}, 5.0)
-	pointLight.SetPosition(1, 0, 2)
+	pointLight.SetPosition(1000, 0, 2000)
 	scene.Add(pointLight)
 
 	// Create and add an axis helper to the scene

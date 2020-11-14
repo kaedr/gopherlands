@@ -2,5 +2,5 @@ package utils
 
 import "os"
 
-// OPS is our handly little shortcut for the OS path PathSeparator
-var OPS = string(os.PathSeparator)
+// Sep is our handly little shortcut for the OS PathSeparator
+var Sep = string(os.PathSeparator)

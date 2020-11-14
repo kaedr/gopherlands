@@ -1,16 +1,18 @@
 [
 	{
-		"name": "TestBlock",
-		"path": "test/blocks/testblocks",
+		"name": "test_block",
+		"pretty": "Test Block",
+		"path": "test.blocks.testblocks",
 		"toughness": 10,
-		"substances": ["Stone"],
+		"substances": ["TestSubstance"],
 		"faces": {
 			"front": "0_one.png",
       "back": "1_two.png",
       "top": "2_three.png",
       "bottom": "3_four.png",
       "left": "4_five.png",
-      "right": "5_six.png"
+      "right": "5_six.png",
+			"sides": "error.png"
 		}
 	}
 ]
